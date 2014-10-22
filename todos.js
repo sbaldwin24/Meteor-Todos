@@ -1,7 +1,7 @@
 Todos = new Meteor.Collection('todos');
 
-
 if (Meteor.isClient) {
+	todosSub = Meteor.subscribe('todos'); //making todosSub global allows me to play with it the js console
 	Template.TodosPanel.helpers({
 		items: function() {
 			return Todos.find({}, {
@@ -43,7 +43,8 @@ if (Meteor.isClient) {
 			Todos.insert({
 				subject: subject,
 				created_at: new Date,
-				is_done: false
+				is_done: false,
+				user_id: Meteor.userId()
 			});
 
 			var form = tmpl.find('form');
@@ -62,5 +63,22 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
+	Meteor.publish('todos', function() {
+		this.userId
+		return Todos.find({user_id: this.userId});
+	});
 
+	Todos.allow({
+		insert: function (userId, doc) {
+			return userId;
+		},
+
+		update: function(userId, doc, fieldName, modifier) {
+			return doc.user_id === userId;
+		},
+
+		remove: function (userId, doc) {
+			return doc.user_id === userId;
+		}
+	});
 }

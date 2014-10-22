@@ -6,7 +6,7 @@ body {
 
 .container {
   margin: 20px auto;
-  width: 940px;
+  width: 100%;
 }
 
 .login {
@@ -14,10 +14,12 @@ body {
 }
 
 .todos-panel {
+  margin-left: 30px;
 }
 
 .create-todo input {
   width: 100%;
+  margin-right: 10px;
   padding: 10px;
   font-size: 18pt;
   height: 24pt;
@@ -35,6 +37,7 @@ body {
   list-style: none;
   clear: both;
   overflow: hidden;
+  margin-right: -10px;
   margin: 0px;
   padding: 0px;
 }
@@ -42,22 +45,25 @@ body {
 .todo-item {
   clear: both;
   float: left;
+  margin-right: -10px;
   padding: 10px 0px;
   border-bottom: 1px solid #ccc;
   width: 100%;
 
   &.done {
     .subject {
+      margin-right: 10px;
       text-decoration: line-through;
     }
   }
 
   .done {
+    margin-right: 10px;
     float: left;
   }
 
   .subject {
     float: left;
-    padding-left: 20px;
+    padding-left: 10px;
   }
 }
